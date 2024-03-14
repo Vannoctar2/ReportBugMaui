@@ -13,9 +13,10 @@ namespace TestZone.Test.Models
 {
     public class GraphicModel : TestZone.Test.Views.Models.ITitled
     {
-      
+
         public ContentView _curveContent { get; set; }
-        public ContentView curveContent { get {  return _curveContent;} set{_curveContent = value;OnPropertyChanged();}}
+        public ContentView curveContent { get { return _curveContent; } set { _curveContent = value; OnPropertyChanged();
+            } }
 
 
         private string _Name { get; set; }
@@ -24,9 +25,9 @@ namespace TestZone.Test.Models
         public GraphicModel(String name)
         {
             this.Name = name;
-            initCurve();
+         //   initCurve();
         }
-
+        /*
         private void initCurve()
         {
             Console.WriteLine("INIT DRAWER");
@@ -39,13 +40,13 @@ namespace TestZone.Test.Models
                 HorizontalOptions = LayoutOptions.FillAndExpand,
                 Drawer = new CanvasDrawer { }
             };
-
             
             this.curveContent = new ContentView();
             this.curveContent.BackgroundColor = Colors.Green;
             this.curveContent.Content = chartView;
 
         }
+        */
         public event PropertyChangedEventHandler? PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
