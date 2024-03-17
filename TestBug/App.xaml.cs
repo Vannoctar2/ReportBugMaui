@@ -8,7 +8,9 @@ namespace TestBug
         {
             InitializeComponent();
 
-            MainPage = new TestPage();
+            //            MainPage = new TestPage();
+//            MainPage = new ScrollTestView();
+            MainPage = new ScrollTestViewWithoutCarousel();
         }
     }
 }

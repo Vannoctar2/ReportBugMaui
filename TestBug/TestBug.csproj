@@ -66,6 +66,33 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Test\Views\CustomView.xaml.cs">
+	    <DependentUpon>CustomView.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Test\Views\ScrollTestViewWithoutCarousel.xaml.cs">
+	    <DependentUpon>ScrollTestViewWithoutCarousel.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Test\Views\ScrollTestView.xaml.cs">
+	    <DependentUpon>ScrollTestView.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Test\Views\ScrollRepere.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Test\Views\CustomView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Test\Views\ScrollTestViewWithoutCarousel.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Test\Views\ScrollTestView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
 	  <None Update="Test\Views\CustomSelector.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </None>

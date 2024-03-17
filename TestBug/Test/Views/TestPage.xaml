@@ -25,7 +25,7 @@
                     <!--OK-->
                     <DataTemplate x:DataType="custom:GraphicModel">
 <!--                        <ContentView Content="{Binding curveContent}"/>-->
-                        <subviews:MyCanvasView Titled="{Binding .}"/>
+                        <subviews:MyCanvasView Titled="{Binding ., Mode=TwoWay}"/>
                         <!-- C'EST CA QUI SOULE-->
                     </DataTemplate>
                 </CarouselView.ItemTemplate>
