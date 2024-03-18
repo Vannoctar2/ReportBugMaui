@@ -20,8 +20,9 @@
                 />
 
             <ScrollView x:Name="_scroll"
+                        HorizontalOptions="FillAndExpand"
                         BackgroundColor="Red"
-                        Orientation="Both" 
+                        Orientation="Horizontal" 
                         HorizontalScrollBarVisibility="Always" VerticalScrollBarVisibility="Always">
                     <HorizontalStackLayout WidthRequest="3000" HeightRequest="500" BackgroundColor="Green">
                         <Label Text="qsdfjhqdskfjhkjqdfh"/>

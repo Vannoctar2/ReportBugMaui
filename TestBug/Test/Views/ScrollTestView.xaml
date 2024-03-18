@@ -23,14 +23,10 @@
             ItemsUpdatingScrollMode="KeepLastItemInView"
             ItemsSource="{Binding ContentViews, Source={x:Reference _TreeCarouselView}, Mode=TwoWay}"
             >
-            <!-- VOIR DU COTE DE CONTENT VIEW -->
             <CarouselView.ItemTemplate>
-                <!--OK-->
                 <DataTemplate x:DataType="models:ScrollTestModel">
                     <StackLayout HorizontalOptions="Fill">
-                        <!--ItemsSource="{Binding CompetencesList, Mode=TwoWay, Source={RelativeSource AncestorType={x:Type models:TreeModel}}}"-->
                         <Label Text="{Binding Name, Source={RelativeSource AncestorType={x:Type models:ScrollTestModel}}}" TextColor="White"/>
-
                         <views:CustomView 
                             HorizontalOptions="Fill"
                             Name="{Binding Name,Mode=TwoWay, Source={RelativeSource AncestorType={x:Type models:ScrollTestModel}}}">

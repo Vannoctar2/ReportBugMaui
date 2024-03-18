@@ -7,6 +7,8 @@
              
              >
     <ContentView.Content>
-        <StackLayout x:Name="_stack" Orientation="Horizontal" VerticalOptions="Center" Spacing="0"/>
+        <HorizontalStackLayout x:Name="_stack"  VerticalOptions="Center" Spacing="0">
+            <Label Text="{Binding LineWidth, Source={x:Reference scrollRepere}}" TextColor="White"/>
+        </HorizontalStackLayout>
     </ContentView.Content>
 </ContentView>

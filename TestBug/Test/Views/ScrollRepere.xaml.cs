@@ -16,8 +16,6 @@ namespace TestZone.Test.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ScrollRepere : ContentView
     {
-
-
         private float _lineWidth { get; set; }
         public float LineWidth { get { return _lineWidth; } set { _lineWidth = value; OnPropertyChanged(); } }
 
@@ -86,14 +84,9 @@ namespace TestZone.Test.Views
         static void OnInitScroll(BindableObject bindable, object oldValue, object newValue)
         {
             ScrollRepere view = (ScrollRepere)bindable;
-
-            Console.WriteLine("SCROLL REPERE SCROLL  : INIT SCROLL VIEW");
             view.ScrollView = (ScrollView)newValue;
-
-            Console.WriteLine("SCROLL REPERE SCROLL  : INIT SCROLL VIEW : "  + view.ScrollView);
             view.ScrollView.Scrolled += (s, e) =>
             {
-                Console.WriteLine("SCROLL REPERE SCROLL  : " + view.Pourcentage);
                 view.Pourcentage = (float)view.ScrollView.ScrollX / (float)(view.ScrollView.ContentSize.Width - view.ScrollView.Width);
             };
         }
@@ -160,22 +153,9 @@ namespace TestZone.Test.Views
                         Margin = 0
                     };
                     TapGestureRecognizer tapGestureRecognizer = new TapGestureRecognizer();
-                    tapGestureRecognizer.Tapped += (s, e) =>
-                        {
-                            Console.WriteLine("SCROLL REPERE - TAPPED");
-                            if (ScrollView != null)
-                            {
-
-                                int scrollX = (int)(circlePourcenrtage * (this.ScrollView.ContentSize.Width - ScrollView.Width)) + 1;
-                                Console.WriteLine("SCROLL REPERE SCROLL  : " + scrollX);
-                                ScrollView.ScrollToAsync(scrollX, 0, true);
-                            }
-                            else {
-                                Console.WriteLine("SCROLL REPERE - SCROLL VIEW IS NULL");
-                            }
-                        };
+                    tapGestureRecognizer.Tapped += ELlipseTapped; 
                     tapGestureRecognizer.NumberOfTapsRequired = 1;
-                    Console.WriteLine("SCROLL REPERE - ADD TAP GESTURE");
+
                     ellipse.GestureRecognizers.Add(tapGestureRecognizer);
 
                     if(i > 0 || this.ShowedExtremities) {
@@ -214,10 +194,21 @@ namespace TestZone.Test.Views
             float totalWidthCircle = NbCircle * diametreCircle;
             float totalWidthLine = (float)(_stack.Bounds.Width - totalWidthCircle);
             LineWidth = (float)totalWidthLine / (float)(ShowedExtremities ? (NbCircle + 1) : NbCircle - 1);
-            InvalidateLayout();
-            Console.WriteLine("SCROLL REPERE - SET LINE WIDTH");
+//            InvalidateLayout();
         }
-}
+
+
+        public void ELlipseTapped(object? sender, EventArgs e)
+        {            
+            Ellipse ellipse = sender as Ellipse;
+            float circlePourcenrtage = (float)ellipses.IndexOf(ellipse) / (float)(NbCircle - 1);
+            if (ScrollView != null)
+            {
+                int scrollX = (int)(circlePourcenrtage * (this.ScrollView.ContentSize.Width - ScrollView.Width)) + 1;
+                ScrollView.ScrollToAsync(scrollX, 0, true);
+            }
+        }
+    }
 
 
 
