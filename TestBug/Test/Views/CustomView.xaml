@@ -18,10 +18,20 @@
                         HeightRequest="100"
                         BackgroundColor="Blue"
                 />
-            
-            <ScrollView x:Name="_scroll" Orientation="Both" HorizontalScrollBarVisibility="Never" VerticalScrollBarVisibility="Never">
-                <AbsoluteLayout x:Name="_absolute" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                </AbsoluteLayout>
+
+            <ScrollView x:Name="_scroll"
+                        BackgroundColor="Red"
+                        Orientation="Both" 
+                        HorizontalScrollBarVisibility="Always" VerticalScrollBarVisibility="Always">
+                    <HorizontalStackLayout WidthRequest="3000" HeightRequest="500" BackgroundColor="Green">
+                        <Label Text="qsdfjhqdskfjhkjqdfh"/>
+                        <Label Text="qsdfjhqdskfjhkjqdfh"/>
+                        <Label Text="qsdfjhqdskfjhkjqdfh"/>
+                        <Label Text="qsdfjhqdskfjhkjqdfh"/>
+                        <Label Text="qsdfjhqdskfjhkjqdfh"/>
+                        <Label Text="qsdfjhqdskfjhkjqdfh"/>
+                        <Label Text="qsdfjhqdskfjhkjqdfh"/>
+                    </HorizontalStackLayout>
             </ScrollView>
             
         </StackLayout>

@@ -14,7 +14,7 @@
             <!--ItemsSource="{Binding CompetencesList, Mode=TwoWay, Source={RelativeSource AncestorType={x:Type models:TreeModel}}}"-->
             <Label Text="Test" TextColor="White"/>
 
-            <views:CustomView Name="Test">
+                <views:CustomView Name="Test">
             </views:CustomView>
         </StackLayout>
     </Grid>

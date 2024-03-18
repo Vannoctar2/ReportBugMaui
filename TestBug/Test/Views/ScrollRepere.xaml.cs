@@ -9,12 +9,14 @@ using Microsoft.Maui.Graphics;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui;
 using Brush = Microsoft.Maui.Controls.Brush;
+using System.Collections.ObjectModel;
 
 namespace TestZone.Test.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ScrollRepere : ContentView
     {
+
 
         private float _lineWidth { get; set; }
         public float LineWidth { get { return _lineWidth; } set { _lineWidth = value; OnPropertyChanged(); } }
@@ -25,16 +27,35 @@ namespace TestZone.Test.Views
         public float Pourcentage
         {
             get { return _pourcentage; }
-            set { _pourcentage = value; OnPropertyChanged(); /*Init();*/ }
+            set { _pourcentage = value; 
+                
+                
+                OnPropertyChanged();
+                OnPourcentageChanged();
+            }
         }
 
         bool firstCall = true;
+
+        public void OnPourcentageChanged()
+        {
+            for(int i = 0; i < ellipses.Count; i++) { 
+                float circlePourcenrtage = (float)i / (float)(NbCircle - 1);
+                Brush bgCircle = new SolidColorBrush(Colors.Transparent);
+                if (Pourcentage >= circlePourcenrtage)
+                {
+                    bgCircle = new SolidColorBrush(Colors.White);
+                    lastCircleIndex = i;
+                }
+                ellipses[i].Fill = bgCircle;
+            }
+        }
 
         public ScrollRepere()
         {
             InitializeComponent();
             BindingContext = this;
-         //   _stack.SizeChanged += Layout_SizeChanged;
+            _stack.SizeChanged += Layout_SizeChanged;
             firstCall = true;
         }
 
@@ -65,10 +86,14 @@ namespace TestZone.Test.Views
         static void OnInitScroll(BindableObject bindable, object oldValue, object newValue)
         {
             ScrollRepere view = (ScrollRepere)bindable;
+
+            Console.WriteLine("SCROLL REPERE SCROLL  : INIT SCROLL VIEW");
             view.ScrollView = (ScrollView)newValue;
 
+            Console.WriteLine("SCROLL REPERE SCROLL  : INIT SCROLL VIEW : "  + view.ScrollView);
             view.ScrollView.Scrolled += (s, e) =>
             {
+                Console.WriteLine("SCROLL REPERE SCROLL  : " + view.Pourcentage);
                 view.Pourcentage = (float)view.ScrollView.ScrollX / (float)(view.ScrollView.ContentSize.Width - view.ScrollView.Width);
             };
         }
@@ -82,8 +107,9 @@ namespace TestZone.Test.Views
         }
 
         private float lastCircleIndex = 0;
-        
-        private List<Line> lines = new List<Line>();
+
+        private ObservableCollection<Line> lines = new ObservableCollection<Line>();
+        private ObservableCollection<Ellipse> ellipses = new ObservableCollection<Ellipse>();
         private void Init()
         {
             float lastCirclePourcenrtage = (float)lastCircleIndex / (float)(NbCircle - 1);
@@ -92,23 +118,18 @@ namespace TestZone.Test.Views
             {
         
                 firstCall = false;
-//                this._stack.Children.Clear();
-          //      double width = this._stack.Bounds.Width;
-               
-                SolidColorBrush brush = new SolidColorBrush(Colors.White);
-                
+                SolidColorBrush brush = new SolidColorBrush(Colors.White);               
                 int diametreCircle = 16;
                 int lineY = diametreCircle / 2;
-
                 double totalWidthCircle = NbCircle * diametreCircle;
                 double totalWidthLine = _stack.Bounds.Width - totalWidthCircle;
                 LineWidth = (float)(totalWidthLine / (ShowedExtremities ? (NbCircle+1) : NbCircle-1));
+
                 for (int i = 0; i < NbCircle; i++)
                 {
                     Line A = new Line()
                     {
                         X1 = 0,
-//                        X2 = 10,
                         X2 = LineWidth,
                         Y1 = lineY,
                         Y2 = lineY,
@@ -119,6 +140,7 @@ namespace TestZone.Test.Views
 
                     A.BindingContext = this;
                     A.SetBinding(Line.X2Property, "LineWidth", BindingMode.TwoWay);
+
                     float circlePourcenrtage = (float)i / (float)(NbCircle - 1);
 
                     Brush bgCircle = new SolidColorBrush(Colors.Transparent);
@@ -137,20 +159,30 @@ namespace TestZone.Test.Views
                         Stroke = brush,
                         Margin = 0
                     };
-                        var tapGestureRecognizer = new TapGestureRecognizer();
-                        tapGestureRecognizer.Tapped += (s, e) =>
+                    TapGestureRecognizer tapGestureRecognizer = new TapGestureRecognizer();
+                    tapGestureRecognizer.Tapped += (s, e) =>
                         {
+                            Console.WriteLine("SCROLL REPERE - TAPPED");
                             if (ScrollView != null)
                             {
+
                                 int scrollX = (int)(circlePourcenrtage * (this.ScrollView.ContentSize.Width - ScrollView.Width)) + 1;
+                                Console.WriteLine("SCROLL REPERE SCROLL  : " + scrollX);
                                 ScrollView.ScrollToAsync(scrollX, 0, true);
                             }
+                            else {
+                                Console.WriteLine("SCROLL REPERE - SCROLL VIEW IS NULL");
+                            }
                         };
-                        ellipse.GestureRecognizers.Add(tapGestureRecognizer);
+                    tapGestureRecognizer.NumberOfTapsRequired = 1;
+                    Console.WriteLine("SCROLL REPERE - ADD TAP GESTURE");
+                    ellipse.GestureRecognizers.Add(tapGestureRecognizer);
+
                     if(i > 0 || this.ShowedExtremities) {
                         lines.Add(A);
                         this._stack.Children.Add(A);
                     }
+                    ellipses.Add(ellipse);
                     _stack.Children.Add(ellipse);
                 }
                 if (ShowedExtremities) {
@@ -182,9 +214,10 @@ namespace TestZone.Test.Views
             float totalWidthCircle = NbCircle * diametreCircle;
             float totalWidthLine = (float)(_stack.Bounds.Width - totalWidthCircle);
             LineWidth = (float)totalWidthLine / (float)(ShowedExtremities ? (NbCircle + 1) : NbCircle - 1);
-
+            InvalidateLayout();
+            Console.WriteLine("SCROLL REPERE - SET LINE WIDTH");
         }
-    }
+}
 
 
 

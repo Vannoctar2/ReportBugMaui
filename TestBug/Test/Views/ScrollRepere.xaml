@@ -7,13 +7,6 @@
              
              >
     <ContentView.Content>
-        <StackLayout x:Name="_stack"       SizeChanged="Layout_SizeChanged"    
-                     Orientation="Horizontal" VerticalOptions="Center" Spacing="0">
-            <Label Text="{Binding LineWidth, Source={x:Reference scrollRepere}}" TextColor="White"/>
-            <!--            <Line X1="0" X2="{Binding LineWidth, Mode=TwoWay, Source={x:Reference scrollRepere}}" Y1="10"  Y2="10" />
-            <Line X1="0" X2="{Binding LineWidth, Mode=TwoWay, Source={x:Reference scrollRepere}}" Y1="10"  Y2="10" />
-            <Line X1="0" X2="{Binding LineWidth, Mode=TwoWay, Source={x:Reference scrollRepere}}" Y1="10"  Y2="10" />
-            <Line X1="0" X2="{Binding LineWidth, Mode=TwoWay, Source={x:Reference scrollRepere}}" Y1="10"  Y2="10" />-->
-        </StackLayout>
+        <StackLayout x:Name="_stack" Orientation="Horizontal" VerticalOptions="Center" Spacing="0"/>
     </ContentView.Content>
 </ContentView>
