@@ -8,12 +8,14 @@
              >
     <!-- TREE VIEW S'AFFICHE MAIS PAS LE RESTE VISIBLEMENT , LE PB VIENT DE SCROOL VIEW ET SCOLL REPERE, PK?-->
   <ContentView.Content>
+      
         <StackLayout x:Name="_parent">
+            <!--                      ScrollView="{Binding ., Source={x:Reference _scroll}, Mode=TwoWay}" NbCircle="7"-->
             <controls:ScrollRepere 
                         x:Name="Anchors" 
                        Padding="50,0,50,0"
-                       ScrollView="{Binding ., Source={x:Reference _scroll}, Mode=TwoWay}" NbCircle="7"
                        VerticalOptions="Center"
+                       ScrollView="{Binding ., Source={x:Reference _scroll}, Mode=TwoWay}" NbCircle="7"
                        Margin="0,30,0,0"
                         HeightRequest="100"
                         BackgroundColor="Blue"
@@ -25,6 +27,7 @@
                         Orientation="Horizontal" 
                         HorizontalScrollBarVisibility="Always" VerticalScrollBarVisibility="Always">
                     <HorizontalStackLayout WidthRequest="3000" HeightRequest="500" BackgroundColor="Green">
+                        <Label Text="{Binding Name, Source={RelativeSource AncestorType={x:Type controls:CustomView}}, StringFormat='jsjfqlkdsfj:{0}'}"/>
                         <Label Text="qsdfjhqdskfjhkjqdfh"/>
                         <Label Text="qsdfjhqdskfjhkjqdfh"/>
                         <Label Text="qsdfjhqdskfjhkjqdfh"/>
@@ -32,7 +35,7 @@
                         <Label Text="qsdfjhqdskfjhkjqdfh"/>
                         <Label Text="qsdfjhqdskfjhkjqdfh"/>
                         <Label Text="qsdfjhqdskfjhkjqdfh"/>
-                    </HorizontalStackLayout>
+                </HorizontalStackLayout>
             </ScrollView>
             
         </StackLayout>

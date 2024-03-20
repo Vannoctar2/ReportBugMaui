@@ -12,6 +12,7 @@ using Microsoft.Maui.Controls;
 using Microsoft.Maui;
 using Microsoft.Maui.Controls.Internals;
 using View = Microsoft.Maui.Controls.View;
+using static System.Net.Mime.MediaTypeNames;
 
 
 namespace TestZone.Test.Views
@@ -94,7 +95,52 @@ namespace TestZone.Test.Views
         }
 
      
+        public void Build()
+        {
+            ScrollRepere repere = new ScrollRepere()
+            {
+                Padding = new Thickness(50, 0, 50, 0),
+                VerticalOptions = LayoutOptions.Center,
+                Margin = new Thickness(0, 30, 0, 0),
+                HeightRequest = 100,
+                BackgroundColor = Colors.Blue,
+                NbCircle = 7
+            };
 
+            Microsoft.Maui.Controls.ScrollView scrollview = new Microsoft.Maui.Controls.ScrollView()
+            {
+                Orientation = ScrollOrientation.Horizontal,
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+                BackgroundColor = Colors.Red,
+                HorizontalScrollBarVisibility = Microsoft.Maui.ScrollBarVisibility.Always,
+                VerticalScrollBarVisibility = Microsoft.Maui.ScrollBarVisibility.Always,
+            };
+            HorizontalStackLayout stack = new HorizontalStackLayout()
+            {
+                WidthRequest = 3000,
+                HeightRequest = 500,
+                BackgroundColor = Colors.Green,
+            };
+            for(int i = 0; i < 7; i++)
+            {
+                Label label = new Label()
+                {
+                    Text = "qsdfjhqdskfjhkjqdfh"
+                };
+                stack.Add(label);
+            }
+            scrollview.Content = stack;
+            repere.ScrollView = scrollview;
+
+            Microsoft.Maui.Controls.StackLayout root = new Microsoft.Maui.Controls.StackLayout()
+            {
+                Orientation = StackOrientation.Vertical
+            };
+            root.Children.Add(repere);
+            root.Children.Add(stack);
+//            this.AddLogicalChild(root);
+            this.Content = root;
+        }
 
         public void init()
         {
